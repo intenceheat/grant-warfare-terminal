@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 33% 4%;
+    --foreground: 240 12% 92%;
+    --card: 240 11% 18%;
+    --card-foreground: 240 12% 92%;
+    --popover: 240 11% 18%;
+    --popover-foreground: 240 12% 92%;
+    --primary: 210 100% 64%;
+    --primary-foreground: 240 12% 92%;
+    --secondary: 240 11% 18%;
+    --secondary-foreground: 240 12% 92%;
+    --muted: 240 11% 18%;
+    --muted-foreground: 240 8% 57%;
+    --accent: 210 100% 64%;
+    --accent-foreground: 240 12% 92%;
+    --destructive: 9 100% 64%;
+    --destructive-foreground: 240 12% 92%;
+    --border: 240 11% 18%;
+    --input: 240 11% 18%;
+    --ring: 210 100% 64%;
+    --chart-1: 210 100% 64%;
+    --chart-2: 150 100% 64%;
+    --chart-3: 9 100% 64%;
+    --chart-4: 240 8% 57%;
+    --chart-5: 240 11% 18%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-void-base text-void-text-primary;
+    background-image: radial-gradient(ellipse at top, rgba(74, 158, 255, 0.05) 0%, transparent 50%),
+                      radial-gradient(ellipse at bottom, rgba(74, 255, 136, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  html, body, #__next {
+    @apply h-full;
+  }
+}
+
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: center;
+  }
+  100% {
+    transform: rotate(360deg);
+    transform-origin: center;
+  }
+}
+
+@keyframes brain-wave-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes crosshair-lock {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+}
+
+@keyframes bracket-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes glyph-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+  50% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+}
+
+@keyframes routing-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.radar-sweep {
+  animation: radar-sweep 3s linear infinite;
+  transform-origin: 28px 28px;
+}
+
+.brain-waves .wave-1 {
+  animation: brain-wave-pulse 2.5s ease-in-out infinite;
+}
+
+.brain-waves .wave-2 {
+  animation: brain-wave-pulse 2.5s ease-in-out infinite 0.3s;
+}
+
+.brain-waves .wave-3 {
+  animation: brain-wave-pulse 2.5s ease-in-out infinite 0.6s;
+}
+
+.crosshair .center-dot {
+  animation: crosshair-lock 2s ease-in-out infinite;
+}
+
+.crosshair .bracket-tl,
+.crosshair .bracket-tr,
+.crosshair .bracket-bl,
+.crosshair .bracket-br {
+  animation: bracket-pulse 2s ease-in-out infinite;
+}
+
+.crosshair .bracket-tr {
+  animation-delay: 0.15s;
+}
+
+.crosshair .bracket-bl {
+  animation-delay: 0.3s;
+}
+
+.crosshair .bracket-br {
+  animation-delay: 0.45s;
+}
+
+@keyframes tooltip-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes backdrop-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sidebar-slide-in {
+  from {
+    transform: translateX(-280px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

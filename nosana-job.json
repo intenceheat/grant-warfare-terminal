@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "type": "container",
+  "meta": {
+    "trigger": "now"
+  },
+  "spec": {
+    "image": "intenceheat/grant-warfare-terminal:latest",
+    "gpu": false,
+    "expose": 3000,
+    "env": [
+      "NODE_ENV=production",
+      "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}",
+      "NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}"
+    ]
+  }
+}
