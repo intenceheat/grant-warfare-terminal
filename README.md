@@ -9,8 +9,8 @@ Built for the Nosana Agents 102 Challenge - A production-grade Mastra agent syst
 ## 🚀 LIVE DEPLOYMENT
 
 - **Docker Hub**: `intenceheat/grant-warfare-terminal:final`
-- **Nosana Network**: [Deployment URL pending]
-- **Demo Video**: [Link pending]
+- **Nosana Network**: https://5jpz37pzjycm7xuqpfkpcksdkkmnlwspzz5htyqo4pqr.node.k8s.prd.nos.ci/
+- **Demo Video**: https://www.youtube.com/watch?v=32zp-d3o_Jk
 - **GitHub**: https://github.com/intenceheat/grant-warfare-terminal
 
 ---
