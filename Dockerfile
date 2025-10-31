@@ -45,4 +45,20 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+# Add debug startup script
+COPY --chown=nextjs:nodejs <<EOF /app/start.sh
+#!/bin/sh
+echo "=== STARTUP DEBUG ==="
+echo "NODE_ENV: \$NODE_ENV"
+echo "PORT: \$PORT" 
+echo "HOSTNAME: \$HOSTNAME"
+echo "Working directory: \$(pwd)"
+echo "Files in current dir:"
+ls -la
+echo "=== STARTING NODE ==="
+exec node server.js
+EOF
+
+RUN chmod +x /app/start.sh
+
+CMD ["/app/start.sh"]

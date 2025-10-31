@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "type": "container",
+  "meta": {
+    "trigger": "dashboard"
+  },
+  "ops": [
+    {
+      "type": "container/run",
+      "id": "grant-warfare",
+      "args": {
+        "image": "node:20-alpine",
+        "cmd": "apk add git && git clone https://github.com/yourusername/grant-warfare-terminal.git /app && cd /app && npm install -g pnpm && pnpm install && pnpm build && pnpm start",
+        "expose": [3000],
+        "env": {
+          "NODE_ENV": "production"
+        }
+      }
+    }
+  ]
+}

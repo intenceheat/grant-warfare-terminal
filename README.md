@@ -1,21 +1,24 @@
+# GRANT WARFARE TERMINAL
+
 **AI-Powered Tactical Intelligence for DAO Governance Proposals**
 
-Built for the Nosana Agents 102 Challenge - A production-grade Mastra agent system with full MCP protocol implementation and real-time streaming analysis that transforms DAO grant proposals into actionable tactical intelligence.
+Built for the Nosana Agents 102 Challenge - A production-grade Mastra agent system with full MCP protocol implementation that transforms DAO grant proposals into actionable tactical intelligence.
 
 ---
 
 ## 🚀 LIVE DEPLOYMENT
 
-- **Docker Hub**: `intenceheat/grant-warfare-terminal:latest`
-- **Nosana Network**: [Add job URL after deployment]
-- **Demo Video**: [Add YouTube link after recording]
+- **Docker Hub**: `intenceheat/grant-warfare-terminal:final`
+- **Nosana Network**: [Deployment URL pending]
+- **Demo Video**: [Link pending]
 - **GitHub**: https://github.com/intenceheat/grant-warfare-terminal
 
 ---
 
-📐 SYSTEM ARCHITECTURE
-High-Level Overview
+## 📐 SYSTEM ARCHITECTURE
 
+### High-Level Overview
+```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         GRANT WARFARE TERMINAL                       │
 │                     Tactical Intelligence Platform                   │
@@ -29,18 +32,18 @@ High-Level Overview
         ├───────────────────────┤    ├───────────────────────┤
         │ • ProposalScanner     │    │ • Tool Discovery      │
         │ • TacticalBriefPanel  │    │ • Resource Management │
-        │ • Real-time Streaming │    │ • Prompt Templating   │
-        │ • Glyph Navigation    │    │ • External Agent API  │
+        │ • Glyph Navigation    │    │ • Prompt Templating   │
+        │ • Filter System       │    │ • External Agent API  │
         └───────────┬───────────┘    └───────────────────────┘
                     │
                     ▼
         ┌───────────────────────────────────────────────────┐
         │           API LAYER (Next.js API Routes)          │
         ├───────────────────────────────────────────────────┤
-        │  /api/analyze           │  /api/analyze-stream    │
-        │  (Mastra Direct)        │  (SSE Streaming)        │
-        │  • Standard execution   │  • Real-time updates    │
-        │  • Cached responses     │  • Progressive render   │
+        │  /api/analyze           │  /api/mcp               │
+        │  (Mastra Direct)        │  (MCP Protocol)         │
+        │  • Agent execution      │  • Tool discovery       │
+        │  • Cached responses     │  • Resource access      │
         └───────────┬───────────────────────┬───────────────┘
                     │                       │
                     ▼                       ▼
@@ -80,12 +83,12 @@ High-Level Overview
         ├───────────────────────────────────────────────────┤
         │  proposal_analyses        │  proposal_cache       │
         │  • Tactical brief storage │  • API response cache │
-        │  • Analysis history       │  • 10-min TTL         │
-        │  • Relational queries     │  • Performance layer  │
+        │  • Analysis history       │  • Performance layer  │
+        │  • Relational queries     │  • Instant retrieval  │
         └───────────────────────────────────────────────────┘
 ```
 
-### **Data Flow: Real-Time Streaming Analysis**
+### Data Flow: Analysis Execution
 ```
 USER ACTION: Click "ANALYZE TARGET"
        │
@@ -99,8 +102,8 @@ USER ACTION: Click "ANALYZE TARGET"
              │ CACHE MISS
              ▼
 ┌─────────────────────────────────────────────────────────┐
-│ 2. INITIATE STREAMING (Server-Sent Events)             │
-│    Event: { type: 'status', message: 'Starting...' }   │
+│ 2. INITIATE ANALYSIS                                    │
+│    Display: Loading modal with processing indicator     │
 └────────────┬────────────────────────────────────────────┘
              │
              ▼
@@ -117,16 +120,9 @@ USER ACTION: Click "ANALYZE TARGET"
 │    }                                                    │
 └────────────┬────────────────────────────────────────────┘
              │
-             ▼ STREAM EVENT
-┌─────────────────────────────────────────────────────────┐
-│ 4. UI UPDATE #1                                         │
-│    Event: { type: 'psychology', data: {...} }          │
-│    Display: Psychology panel populates in real-time     │
-└────────────┬────────────────────────────────────────────┘
-             │
              ▼
 ┌─────────────────────────────────────────────────────────┐
-│ 5. EDGE TOOL EXECUTION (~10-12 seconds)                │
+│ 4. EDGE TOOL EXECUTION (~10-12 seconds)                │
 │    Input: { title, description, psychologyAnalysis }    │
 │    LLM: Claude Sonnet 4.5                               │
 │    Output: {                                            │
@@ -141,39 +137,32 @@ USER ACTION: Click "ANALYZE TARGET"
 │    }                                                    │
 └────────────┬────────────────────────────────────────────┘
              │
-             ▼ STREAM EVENT
-┌─────────────────────────────────────────────────────────┐
-│ 6. UI UPDATE #2                                         │
-│    Event: { type: 'edge', data: {...} }                │
-│    Display: Competitive edge panel populates            │
-└────────────┬────────────────────────────────────────────┘
-             │
              ▼
 ┌─────────────────────────────────────────────────────────┐
-│ 7. CALCULATE OPPORTUNITY SCORE                          │
+│ 5. CALCULATE OPPORTUNITY SCORE                          │
 │    Formula: (skillMatch × 0.4 + winProbability × 0.6)/10│
 │    Example: (85 × 0.4 + 72 × 0.6) / 10 = 7.7           │
 └────────────┬────────────────────────────────────────────┘
              │
              ▼
 ┌─────────────────────────────────────────────────────────┐
-│ 8. SAVE TO SUPABASE                                     │
+│ 6. SAVE TO SUPABASE                                     │
 │    Table: proposal_analyses                             │
 │    Data: Full tactical brief + timestamp                │
 └────────────┬────────────────────────────────────────────┘
              │
-             ▼ STREAM EVENT
+             ▼
 ┌─────────────────────────────────────────────────────────┐
-│ 9. FINAL UI UPDATE                                      │
-│    Event: { type: 'complete', data: {...} }            │
-│    Display: Full tactical brief with all sections       │
+│ 7. DISPLAY TACTICAL BRIEF                               │
+│    Modal closes, brief panel slides in                  │
+│    Complete analysis with all sections populated        │
 │    Actions: "EXPORT BRIEF" | "ANALYZE ANOTHER"         │
 └─────────────────────────────────────────────────────────┘
 
-TOTAL TIME: 20-25 seconds (with real-time feedback)
+TOTAL TIME: 20-25 seconds
 ```
 
-### **MCP Protocol Integration**
+### MCP Protocol Integration
 ```
 ┌──────────────────────────────────────────────────────────┐
 │           EXTERNAL MCP CLIENT (e.g. Claude Desktop)      │
@@ -238,9 +227,9 @@ Grant Warfare Terminal uses a **dual-tool Mastra pipeline** with MCP protocol im
 ```
 DAO Proposal → MCP Psychology Tool → MCP Edge Tool → Tactical Brief
                     ↓                      ↓
-              Real-time Stream      Real-time Stream
+              Urgency/Desperation    Skill Match/Strategy
                     ↓                      ↓
-                Live UI Updates    Live UI Updates
+              Cached in Supabase    Cached in Supabase
 ```
 
 ### **Psychology Tool (MCP-Compliant)**
@@ -288,6 +277,7 @@ mcp/
 │   ├── analyze-proposal.ts  # MCP prompt template
 │   └── generate-brief.ts    # MCP prompt template
 └── index.ts                 # MCP exports
+```
 
 **MCP Capabilities:**
 - ✅ **Tools**: 2 custom MCP tools (psychology + edge)
@@ -307,46 +297,6 @@ pnpm run mcp
 - Provides prompt templates for consistent analysis
 - Protocol-level interoperability with other MCP clients
 - Future-proof agent ecosystem integration
-
----
-
-## 📡 LIVE SYNCHRONIZATION
-
-### **Real-Time Streaming Architecture**
-
-Server-Sent Events (SSE) pipeline streams analysis results as they complete, providing instant UI updates during the 20-25 second analysis process.
-
-**Streaming Flow:**
-```
-User clicks ANALYZE
-       ↓
-Status: "Starting psychology analysis..."
-       ↓
-Psychology Tool executes
-       ↓
-Stream event → UI updates with psychology results
-       ↓
-Status: "Psychology complete. Starting edge analysis..."
-       ↓
-Edge Tool executes
-       ↓
-Stream event → UI updates with edge results
-       ↓
-Stream event → UI shows complete tactical brief
-```
-
-**Implementation:**
-- **Endpoint**: `/api/analyze-stream`
-- **Protocol**: Server-Sent Events (text/event-stream)
-- **Events**: status, psychology, edge, complete, error
-- **Client**: Custom React hook (`useStreamingAnalysis`)
-
-**Why Streaming:**
-- Real-time feedback during sequential tool execution
-- Users see progress instead of blank loading screens
-- Better UX for long-running LLM operations
-- Meets bounty requirement for "live synchronization"
-- Enables future multi-agent coordination
 
 ---
 
@@ -412,19 +362,6 @@ Stream event → UI shows complete tactical brief
 
 ---
 
-### **Why No Streaming in v1? (Addressed in v2)**
-
-**Decision:** Originally built synchronous, upgraded to streaming after feedback.
-
-**Original Rationale:**
-- Prioritized correctness over speed for initial release
-- Sequential tools require full context handoff
-- Simpler error handling and debugging
-
-**v2 Update:** Added SSE streaming after proving core intelligence worked, meeting bounty live-sync requirement.
-
----
-
 ## 🛠️ TECH STACK
 
 ### **Agent Framework**
@@ -434,10 +371,9 @@ Stream event → UI shows complete tactical brief
 - **Zod**: Schema validation for tool I/O
 
 ### **Backend**
-- **Next.js 14**: App router + API routes
+- **Next.js 13.5**: App router + API routes
 - **Supabase**: PostgreSQL caching + persistence
 - **Node.js 20**: Runtime environment
-- **Server-Sent Events**: Real-time streaming
 
 ### **Frontend**
 - **React 18**: UI components
@@ -498,8 +434,8 @@ docker run -p 3000:3000 \
   grant-warfare-terminal
 
 # Push to Docker Hub
-docker tag grant-warfare-terminal YOUR-USERNAME/grant-warfare-terminal:latest
-docker push YOUR-USERNAME/grant-warfare-terminal:latest
+docker tag grant-warfare-terminal YOUR-USERNAME/grant-warfare-terminal:final
+docker push YOUR-USERNAME/grant-warfare-terminal:final
 ```
 
 ### **Nosana Deployment**
@@ -512,7 +448,7 @@ nosana address --network mainnet
 
 # Deploy to mainnet
 nosana job post \
-  --file nosana-job.json \
+  --file nosana-job-env-fixed.json \
   --network mainnet \
   --market premium \
   --timeout 3600
@@ -528,23 +464,22 @@ nosana job post \
 Terminal auto-loads 20 live DAO governance proposals from multiple DAOs.
 
 ### **2. Filter & Search**
-Filter by DAO, status, budget range, urgency level.
+Filter by DAO type (All, DeFi, Gaming), status, budget range, urgency level.
 
 ### **3. Analyze Target**
 Click "ANALYZE TARGET" on any proposal to start MCP tool pipeline.
 
-### **4. Watch Streaming Analysis**
-- Status updates appear in real-time
-- Psychology results stream in first
-- Edge analysis results stream in second
-- Complete tactical brief assembles
+### **4. Analysis Execution**
+Analysis runs for 20-25 seconds as both tools execute sequentially. Loading modal displays processing status.
 
 ### **5. Review Tactical Brief**
 View comprehensive intelligence:
-- **Opportunity Score** (0-10 rating)
-- **Psychology Assessment** (urgency, desperation, flexibility)
+- **Opportunity Score** (0-10 rating with visual bar)
+- **Psychology Assessment** (urgency, desperation, flexibility with detailed analysis)
+- **Key Psychological Triggers** (keyword list)
 - **Competitive Edge** (skill match %, win probability %)
-- **Strategic Recommendations** (emphasize, avoid, opening line)
+- **Strategic Recommendations** (advantages, gaps, positioning strategy)
+- **Tactical Guidance** (emphasize points, avoid mistakes, opening line)
 
 ### **6. Export Analysis**
 Download tactical brief as formatted document for offline use.
@@ -599,30 +534,6 @@ const result = await edgeMCPTool.execute({
 // }
 ```
 
-### **Streaming Analysis**
-```typescript
-import { useStreamingAnalysis } from '@/lib/use-streaming-analysis';
-
-function MyComponent() {
-  const { state, analyze } = useStreamingAnalysis();
-
-  const handleAnalyze = () => {
-    analyze({
-      proposalId: "123",
-      title: "Proposal Title",
-      description: "Description...",
-      dao: "DAOName"
-    });
-  };
-
-  // state.status - Current status message
-  // state.psychology - Psychology results (when complete)
-  // state.edge - Edge results (when complete)
-  // state.complete - Full analysis (when done)
-  // state.isStreaming - Boolean streaming state
-}
-```
-
 ---
 
 ## 🏗️ PROJECT STRUCTURE
@@ -653,9 +564,7 @@ grant-warfare-terminal/
 ├── app/
 │   ├── api/
 │   │   ├── analyze/
-│   │   │   └── route.ts              # Standard analysis endpoint
-│   │   ├── analyze-stream/
-│   │   │   └── route.ts              # Streaming analysis endpoint (SSE)
+│   │   │   └── route.ts              # Analysis endpoint
 │   │   └── mcp/
 │   │       └── route.ts              # MCP endpoint
 │   ├── page.tsx                      # Main UI
@@ -673,15 +582,14 @@ grant-warfare-terminal/
 │   └── ...
 ├── lib/
 │   ├── supabase.ts                   # Supabase client + caching
-│   ├── api-client.ts                 # Standard API calls
+│   ├── api-client.ts                 # API calls
 │   ├── api-client-mcp.ts             # MCP API calls
-│   ├── use-streaming-analysis.ts     # Streaming hook
 │   └── snapshot.ts                   # Brief export
 ├── types/
 │   ├── tactical-brief.ts
 │   └── snapshot.ts
 ├── Dockerfile                         # Multi-stage production build
-├── nosana-job.json                    # Nosana deployment config
+├── nosana-job-env-fixed.json          # Nosana deployment config
 ├── package.json
 ├── LICENSE                            # MIT License
 └── README.md
@@ -697,12 +605,6 @@ grant-warfare-terminal/
 - 2 managed MCP resources (proposals + analyses)
 - 2 templated MCP prompts (analysis + brief)
 - Discoverable via standard MCP clients
-
-### **Real-Time Streaming**
-- Server-Sent Events for live analysis updates
-- Progressive result rendering as tools complete
-- Status messages throughout 20-25 second pipeline
-- Smooth user experience during LLM operations
 
 ### **Behavioral Psychology Analysis**
 - Urgency detection via crisis language patterns
@@ -732,7 +634,7 @@ grant-warfare-terminal/
 ### **Military Terminal UI**
 - Tactical command center aesthetic
 - Glyph navigation system
-- Real-time analysis feedback
+- Loading state feedback
 - Professional intelligence display
 
 ---
@@ -755,7 +657,7 @@ NODE_ENV=production
 
 ## 📊 PERFORMANCE
 
-- **Analysis Time**: 20-25 seconds (2 sequential LLM calls with streaming)
+- **Analysis Time**: 20-25 seconds (2 sequential LLM calls)
 - **Caching**: Instant for repeat queries (Supabase)
 - **Docker Image**: 229MB (optimized multi-stage build)
 - **Memory**: ~150MB runtime
@@ -772,7 +674,6 @@ NODE_ENV=production
 - ✅ Build AI agent using Mastra framework
 - ✅ Implement Model Context Protocol (MCP)
 - ✅ Deploy on Nosana decentralized network
-- ✅ Live synchronization / real-time updates
 - ✅ At least 2 custom MCP tools
 - ✅ Production-ready architecture
 
@@ -788,36 +689,19 @@ NODE_ENV=production
    - Actual tactical intelligence extraction from unstructured text
    - Behavioral psychology profiling most competitors won't attempt
 
-3. **Live Streaming Architecture**
-   - Server-Sent Events for real-time updates
-   - Progressive result rendering
-   - Smooth UX during long-running operations
-
-4. **Production Architecture**
+3. **Production Architecture**
    - Supabase caching for performance
    - Docker optimization for deployment
    - Persistent analysis history
    - Export functionality
 
-5. **Real Market Fit**
+4. **Real Market Fit**
    - Grant hunters would actually pay for this
    - Solves real problem (proposal analysis paralysis)
    - Professional intelligence display
 
 **Innovation:**
-First DAO grant psychology profiling agent with full MCP implementation and real-time streaming. Extracts non-obvious behavioral signals that humans miss.
-
----
-
-## 🎥 DEMO VIDEO
-
-[Add 2-minute demo video link showing:]
-1. MCP server running (`pnpm run mcp`)
-2. Live streaming analysis with real-time updates
-3. Psychology → Edge tool pipeline
-4. Tactical brief generation
-5. Code walkthrough (MCP tools + streaming endpoint)
-6. Nosana deployment proof
+First DAO grant psychology profiling agent with full MCP implementation. Extracts non-obvious behavioral signals that humans miss. Production-grade architecture deployed on decentralized infrastructure.
 
 ---
 
@@ -825,8 +709,8 @@ First DAO grant psychology profiling agent with full MCP implementation and real
 
 - **GitHub**: https://github.com/intenceheat/grant-warfare-terminal
 - **Docker Hub**: https://hub.docker.com/r/intenceheat/grant-warfare-terminal
-- **Nosana Job**: [Add after mainnet deployment]
-- **Demo Video**: [Add YouTube link]
+- **Nosana Job**: [Deployment URL pending]
+- **Demo Video**: [Link pending]
 - **Mastra Framework**: https://mastra.ai
 - **MCP Protocol**: https://modelcontextprotocol.io
 - **Nosana Network**: https://nosana.io
