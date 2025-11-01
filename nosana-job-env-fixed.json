@@ -9,11 +9,13 @@
       "type": "container/run",
       "id": "grant-warfare",
       "args": {
-        "image": "node:20-alpine",
-        "cmd": "apk add git && git clone https://github.com/yourusername/grant-warfare-terminal.git /app && cd /app && npm install -g pnpm && pnpm install && pnpm build && pnpm start",
+        "image": "intenceheat/grant-warfare-terminal:final",
         "expose": [3000],
         "env": {
-          "NODE_ENV": "production"
+          "NODE_ENV": "production",
+          "ANTHROPIC_API_KEY": "YOUR_KEY_HERE",
+          "NEXT_PUBLIC_SUPABASE_URL": "https://geogalzbdexpslyagmet.supabase.co",
+          "NEXT_PUBLIC_SUPABASE_ANON_KEY": "YOUR_KEY_HERE"
         }
       }
     }
