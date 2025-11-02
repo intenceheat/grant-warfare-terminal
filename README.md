@@ -709,8 +709,8 @@ First DAO grant psychology profiling agent with full MCP implementation. Extract
 
 - **GitHub**: https://github.com/intenceheat/grant-warfare-terminal
 - **Docker Hub**: https://hub.docker.com/r/intenceheat/grant-warfare-terminal
-- **Nosana Job**: [Deployment URL pending]
-- **Demo Video**: [Link pending]
+- **Nosana Deployment**: https://dashboard.nosana.com/jobs/4MjcybHb4GCnJbash8Wh1bysLuAfHyJZPpShNSW3FxMj
+- **Demo Video**: https://www.youtube.com/watch?v=32zp-d3o_Jk
 - **Mastra Framework**: https://mastra.ai
 - **MCP Protocol**: https://modelcontextprotocol.io
 - **Nosana Network**: https://nosana.io
